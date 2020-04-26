@@ -74,3 +74,6 @@
 - cellphone_drive async function will be called first from async_main in a thread where driving will not performed while using cellphone.
 - during above calling of function eating and talking will be executing on other threads without any interuption and when the cellphone_drive will return its future join executore join these three and get the futures from all three then return the future from async_main to the main synchronous function and thread finished there work.
 
+# Conclusion:
+
+Multi-threading is used to perform tasks on different threads and increase the utilization of the processor while async is used to perform multiple taks on single thread so that we can utilize the processor performance to its maximum while doing I/O intensive tasks.
