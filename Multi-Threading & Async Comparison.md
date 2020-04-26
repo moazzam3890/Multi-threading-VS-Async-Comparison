@@ -8,4 +8,20 @@
 
 # Multi-threading:
 
+- Multi-threading is use to perform multi-tasking or to run the CPU-intensive task simultaneously. 
+- CPU-intensive tasks are those task that donot involve I/O operations. For instant; opening many tabs on a browser.
+- Now assume that we have opened 4 tabs on a browser and palying youtube videos on all of them. They'll run all simultaneously on each thread and each thread will also performing some other tasks as well, like fetching data from youtube.com, dispalying ads etc.
+- Please see below some coding for understanding of multi-threading:
+
+> fn talk_drive_eat() {
+>    let thread1 = thread::spawn(|| talk());
+>    let thread2 = thread::spawn(|| drive()); 
+>    let thread3 = thread::spawn(|| eat());
+>    thread1.join().expect("thread1 panicked");    
+>    thread2.join().expect("thread2 panicked");
+> }
+> fn main() {
+>    talk_drive_eat();
+> }
+
 - 
