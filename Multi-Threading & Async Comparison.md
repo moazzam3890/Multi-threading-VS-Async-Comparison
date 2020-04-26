@@ -24,4 +24,10 @@
 >    talk_drive_eat();
 > }
 
-- 
+- A person is multi-threading because he is driving, eating and talking at the same time which is good but there are some insights which needs to be understand.
+- There will be a switching between these three tasks and sharing data between them. If we apply this to our coding then switching and sharing data between many threads will be very difficult and complex task to do. Because we say that multi-threading run code simultaneously but it doesn't. The switching and sharing is soo fast due to our processor speed that we can't feel it.
+- Also, when the thread doing nothing and waiting for code to execute it'll utilize system resources.
+- Here comes the Async programming to eliminate these issues.
+
+# Asynchronous Programming:
+
