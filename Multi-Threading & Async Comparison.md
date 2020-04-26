@@ -69,4 +69,8 @@
 >  block_on(async_main());
 > }
 
--In above code all three 
+- In above code all three executors has been used. Now we understand the flow of code.
+- From main function block_on block the main thread till it return the future. Async_main will start to execute.
+- cellphone_drive async function will be called first from async_main in a thread where driving will not performed while using cellphone.
+- during above calling of function eating and talking will be executing on other threads without any interuption and when the cellphone_drive will return its future join executore join these three and get the futures from all three then return the future from async_main to the main synchronous function and thread finished there work.
+
