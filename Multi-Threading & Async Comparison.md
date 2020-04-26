@@ -8,7 +8,7 @@
 
 # Multi-threading:
 
-- Multi-threading is use to perform multi-tasking or to run the CPU-intensive task simultaneously. 
+- Multi-threading is use to perform multi-tasking and to run the CPU-intensive task simultaneously. 
 - CPU-intensive tasks are those task that donot involve I/O operations. For instant; opening many tabs on a browser.
 - Now assume that we have opened 4 tabs on a browser and palying youtube videos on all of them. They'll run all simultaneously on each thread and each thread will also performing some other tasks as well, like fetching data from youtube.com, dispalying ads etc.
 - Please see below some coding for understanding of multi-threading:
@@ -19,6 +19,7 @@
 >    let thread3 = thread::spawn(|| eat());
 >    thread1.join().expect("thread1 panicked");    
 >    thread2.join().expect("thread2 panicked");
+>    thread3.join().expect("thread3 panicked");
 > }
 > fn main() {
 >    talk_drive_eat();
@@ -31,4 +32,41 @@
 
 # Asynchronous Programming:
 
-- 
+- Async is used to run IO intensive tasks and perform multi-tasking with those tasks. It can perform other tasks as weel but not suited for that due to complexity.
+- IO intensive tasks are those that includes the input and output operations. For instance; printing out a document, fetching data from a website, scanning a file with scanner and viewing on PC etc.
+- In IO tasks system needs to wait alot and during that wait instead of blocking whole thread and utilizing system resources, that thread start working on other tasks.
+- Please see below code for better understandign:
+
+> async fn talk_drive_eat() {
+> let talk = talking();
+> let drive = driving();
+> let eat = eating();
+> join!(talk,drive,eat);
+> }
+
+- Above code with the async perform the similar function as the threading but there are some limitations in async as well. Lets disscuss them first.
+- Asynchronous programming required extra support from languages or libraries.
+- We need to write some extra syntax to define async and we can't write it in every function.
+- That is why we only write it when we required to dealt with I/O intensive takss.
+- There are executors in async Rust; block_on(), .await() and join!(). 
+- block_on() is use to block the thread and wait for the future. It is used in the synchronous functions.
+- Future is the value that we are waiting to return during our call from async function.
+- .await() is used in the async function only and do not block the whole thread. It just mark the future as awaiting and let the thread do other tasks.
+- join!() is also used in the async functions only and wait for the futures to return and then return to the synchronous function from where async was called.
+- Now see it in the code bellow:
+
+> async fn cellphone_drive() {
+>   let cellphone = using().await;
+>   drive(cellphone).await;
+> }
+> async fn async_main() {
+>  let f1 = cellphone_drive();
+>  let f2 = eat();
+>  let f3 = talking();
+>  futures::join!(f1, f2, f3);
+> }
+> fn main() {
+>  block_on(async_main());
+> }
+
+-In above code all three 
