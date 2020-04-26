@@ -6,3 +6,6 @@
 - To execute the next command code must wait for the running command to execute.
 - Here comes the threading concept.
 
+# Multi-threading:
+
+-
